@@ -347,17 +347,30 @@ const Activities = () => {
                     data-testid="date-input"
                   />
                 </div>
-                <div>
-                  <Label htmlFor="duration" className="font-bold">Duration (minutes) *</Label>
-                  <Input
-                    type="number"
-                    id="duration"
-                    value={formData.duration}
-                    onChange={(e) => setFormData({ ...formData, duration: e.target.value })}
-                    placeholder="60"
-                    className="border-2 border-black"
-                    data-testid="duration-input"
-                  />
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <Label htmlFor="start_time" className="font-bold">Start Time *</Label>
+                    <Input
+                      type="time"
+                      id="start_time"
+                      value={formData.start_time}
+                      onChange={(e) => setFormData({ ...formData, start_time: e.target.value })}
+                      className="border-2 border-black"
+                      data-testid="time-input"
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="duration" className="font-bold">Duration (minutes) *</Label>
+                    <Input
+                      type="number"
+                      id="duration"
+                      value={formData.duration}
+                      onChange={(e) => setFormData({ ...formData, duration: e.target.value })}
+                      placeholder="60"
+                      className="border-2 border-black"
+                      data-testid="duration-input"
+                    />
+                  </div>
                 </div>
                 <div>
                   <Label htmlFor="notes" className="font-bold">Notes (optional)</Label>
