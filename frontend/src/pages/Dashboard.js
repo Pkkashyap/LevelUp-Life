@@ -11,6 +11,7 @@ import ActivityHeatmap from '../components/ActivityHeatmap';
 const Dashboard = () => {
   const [stats, setStats] = useState(null);
   const [activities, setActivities] = useState([]);
+  const [allActivities, setAllActivities] = useState([]);
   const [categories, setCategories] = useState([]);
   const [dailyData, setDailyData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -29,6 +30,7 @@ const Dashboard = () => {
         api.get('/analytics/daily?days=7'),
       ]);
       setStats(statsRes.data);
+      setAllActivities(activitiesRes.data);
       setActivities(activitiesRes.data.slice(0, 5));
       setCategories(categoriesRes.data);
       setDailyData(dailyRes.data);
