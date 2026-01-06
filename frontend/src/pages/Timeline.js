@@ -222,28 +222,33 @@ const Timeline = () => {
                         <p className="text-xs text-muted-foreground">{block.totalMinutes}m</p>
                       </div>
                       <div className="flex-1 space-y-2">
-                        {block.activities.map((activity, idx) => (
-                          <div
-                            key={`${activity.id}-${idx}`}
-                            className="flex items-center gap-3 p-3 bg-white rounded-lg border-2 border-black"
-                          >
+                        {block.activities.map((activity, idx) => {
+                          const startMin = activity.startMinuteInHour || 0;
+                          const timeDisplay = `${block.hour.toString().padStart(2, '0')}:${startMin.toString().padStart(2, '0')}`;
+                          return (
                             <div
-                              className="w-10 h-10 rounded-lg border-2 border-black flex items-center justify-center text-white font-bold text-sm"
-                              style={{ backgroundColor: activity.category?.color }}
+                              key={`${activity.id}-${idx}`}
+                              className="flex items-center gap-3 p-3 bg-white rounded-lg border-2 border-black"
                             >
-                              {activity.minutesInHour}m
+                              <div
+                                className="w-10 h-10 rounded-lg border-2 border-black flex items-center justify-center text-white font-bold text-sm"
+                                style={{ backgroundColor: activity.category?.color }}
+                              >
+                                {activity.minutesInHour}m
+                              </div>
+                              <div className="flex-1">
+                                <p className="font-bold">{activity.category_name}</p>
+                                <p className="text-xs text-muted-foreground">Started at {timeDisplay}</p>
+                                {activity.notes && (
+                                  <p className="text-sm text-muted-foreground mt-1">{activity.notes}</p>
+                                )}
+                              </div>
+                              <div className="text-right">
+                                <p className="text-sm font-bold text-primary">+{activity.minutesInHour * 10} XP</p>
+                              </div>
                             </div>
-                            <div className="flex-1">
-                              <p className="font-bold">{activity.category_name}</p>
-                              {activity.notes && (
-                                <p className="text-sm text-muted-foreground">{activity.notes}</p>
-                              )}
-                            </div>
-                            <div className="text-right">
-                              <p className="text-sm font-bold text-primary">+{activity.minutesInHour * 10} XP</p>
-                            </div>
-                          </div>
-                        ))}
+                          );
+                        })}
                       </div>
                     </motion.div>
                   )
