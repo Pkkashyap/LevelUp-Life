@@ -217,7 +217,7 @@ const Dashboard = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.7 }}
+          transition={{ delay: 0.8 }}
           className="bg-white p-6 rounded-xl border-2 border-black shadow-brutal"
           data-testid="recent-activities"
         >
