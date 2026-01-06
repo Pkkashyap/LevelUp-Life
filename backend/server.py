@@ -177,6 +177,43 @@ async def get_activities(category_id: Optional[str] = None, start_date: Optional
 @api_router.post("/activities", response_model=Activity)
 async def create_activity(activity: ActivityCreate):
     import uuid
+    
+    # Validate time format
+    try:
+        hour, minute = map(int, activity.start_time.split(':'))
+        if not (0 <= hour < 24 and 0 <= minute < 60):
+            raise ValueError()
+    except:
+        raise HTTPException(status_code=400, detail="Invalid time format. Use HH:MM (24-hour)")
+    
+    # Check for activity clashes
+    start_hour = hour
+    start_minute = minute
+    end_minutes = start_minute + activity.duration
+    end_hour = start_hour + (end_minutes // 60)
+    end_minute = end_minutes % 60
+    
+    # Query activities on the same date
+    existing_activities = await db.activities.find({
+        "date": activity.date
+    }, {"_id": 0}).to_list(1000)
+    
+    # Check for overlaps
+    for existing in existing_activities:
+        ex_hour, ex_minute = map(int, existing['start_time'].split(':'))
+        ex_start_minutes = ex_hour * 60 + ex_minute
+        ex_end_minutes = ex_start_minutes + existing['duration']
+        
+        new_start_minutes = start_hour * 60 + start_minute
+        new_end_minutes = new_start_minutes + activity.duration
+        
+        # Check if there's an overlap
+        if not (new_end_minutes <= ex_start_minutes or new_start_minutes >= ex_end_minutes):
+            raise HTTPException(
+                status_code=400, 
+                detail=f"Activity clashes with existing {existing['category_name']} from {existing['start_time']} ({existing['duration']}m)"
+            )
+    
     activity_dict = activity.model_dump()
     activity_dict["id"] = str(uuid.uuid4())
     activity_dict["created_at"] = datetime.now(timezone.utc).isoformat()
