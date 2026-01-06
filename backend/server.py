@@ -42,6 +42,7 @@ class Activity(BaseModel):
     category_id: str
     category_name: str
     date: str
+    start_time: str  # Format: "HH:MM" (24-hour)
     duration: int
     notes: Optional[str] = None
     created_at: str = Field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
@@ -50,6 +51,7 @@ class ActivityCreate(BaseModel):
     category_id: str
     category_name: str
     date: str
+    start_time: str  # Format: "HH:MM"
     duration: int
     notes: Optional[str] = None
 
