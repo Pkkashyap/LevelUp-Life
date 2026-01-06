@@ -108,58 +108,101 @@ const Activities = () => {
 
   const exportToPDF = () => {
     try {
+      if (filteredActivities.length === 0) {
+        toast.error('No activities to export');
+        return;
+      }
+
       const doc = new jsPDF();
       
+      // Add title
       doc.setFontSize(20);
+      doc.setTextColor(124, 58, 237);
       doc.text('LevelUp Life - Activity Report', 14, 20);
       
+      // Add metadata
       doc.setFontSize(12);
+      doc.setTextColor(0, 0, 0);
       doc.text(`Generated: ${new Date().toLocaleDateString()}`, 14, 30);
       doc.text(`Total Activities: ${filteredActivities.length}`, 14, 37);
       
+      // Prepare table data
       const tableData = filteredActivities.map(activity => [
-        activity.date,
+        new Date(activity.date).toLocaleDateString(),
         activity.category_name,
         `${activity.duration} min`,
         activity.notes || '-'
       ]);
       
-      doc.autoTable({
+      // Add table using autoTable
+      autoTable(doc, {
         startY: 45,
         head: [['Date', 'Category', 'Duration', 'Notes']],
         body: tableData,
         theme: 'grid',
-        styles: { fontSize: 10 },
-        headStyles: { fillColor: [124, 58, 237] }
+        styles: { 
+          fontSize: 10,
+          cellPadding: 3
+        },
+        headStyles: { 
+          fillColor: [124, 58, 237],
+          textColor: [255, 255, 255],
+          fontStyle: 'bold'
+        },
+        alternateRowStyles: {
+          fillColor: [245, 245, 245]
+        }
       });
       
-      doc.save('levelup-activities.pdf');
-      toast.success('PDF exported successfully!');
+      // Save the PDF
+      doc.save(`levelup-activities-${new Date().toISOString().split('T')[0]}.pdf`);
+      toast.success('PDF downloaded successfully!');
     } catch (error) {
       console.error('PDF export error:', error);
-      toast.error('Failed to export PDF');
+      toast.error(`PDF export failed: ${error.message}`);
     }
   };
 
   const exportToExcel = () => {
     try {
+      if (filteredActivities.length === 0) {
+        toast.error('No activities to export');
+        return;
+      }
+
+      // Prepare data for Excel
       const excelData = filteredActivities.map(activity => ({
-        Date: activity.date,
-        Category: activity.category_name,
-        'Duration (min)': activity.duration,
-        Notes: activity.notes || '-',
-        'XP Earned': activity.duration * 10
+        'Date': new Date(activity.date).toLocaleDateString(),
+        'Category': activity.category_name,
+        'Duration (minutes)': activity.duration,
+        'Notes': activity.notes || '-',
+        'XP Earned': activity.duration * 10,
+        'Logged At': activity.created_at ? new Date(activity.created_at).toLocaleString() : '-'
       }));
       
+      // Create worksheet
       const worksheet = XLSX.utils.json_to_sheet(excelData);
+      
+      // Set column widths
+      worksheet['!cols'] = [
+        { wch: 12 }, // Date
+        { wch: 15 }, // Category
+        { wch: 12 }, // Duration
+        { wch: 30 }, // Notes
+        { wch: 12 }, // XP
+        { wch: 20 }  // Logged At
+      ];
+      
+      // Create workbook
       const workbook = XLSX.utils.book_new();
       XLSX.utils.book_append_sheet(workbook, worksheet, 'Activities');
       
-      XLSX.writeFile(workbook, 'levelup-activities.xlsx');
-      toast.success('Excel exported successfully!');
+      // Save file
+      XLSX.writeFile(workbook, `levelup-activities-${new Date().toISOString().split('T')[0]}.xlsx`);
+      toast.success('Excel downloaded successfully!');
     } catch (error) {
       console.error('Excel export error:', error);
-      toast.error('Failed to export Excel');
+      toast.error(`Excel export failed: ${error.message}`);
     }
   };
 
