@@ -1,0 +1,78 @@
+.activity-heatmap-container {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.react-calendar-heatmap {
+  width: 100%;
+}
+
+.react-calendar-heatmap text {
+  font-size: 10px;
+  fill: #64748b;
+  font-family: 'Outfit', sans-serif;
+}
+
+.react-calendar-heatmap rect {
+  stroke: #000000;
+  stroke-width: 2px;
+  rx: 4;
+}
+
+.react-calendar-heatmap .color-empty {
+  fill: #F1F5F9;
+}
+
+.react-calendar-heatmap .color-scale-1 {
+  fill: #C7F5C9;
+}
+
+.react-calendar-heatmap .color-scale-2 {
+  fill: #8FE794;
+}
+
+.react-calendar-heatmap .color-scale-3 {
+  fill: #4CD964;
+}
+
+.react-calendar-heatmap .color-scale-4 {
+  fill: #10B981;
+}
+
+.react-calendar-heatmap rect:hover {
+  stroke: #7C3AED;
+  stroke-width: 3px;
+}
+
+.legend-box {
+  width: 16px;
+  height: 16px;
+  border: 2px solid #000000;
+  border-radius: 4px;
+}
+
+.legend-box.color-empty {
+  background-color: #F1F5F9;
+}
+
+.legend-box.color-scale-1 {
+  background-color: #C7F5C9;
+}
+
+.legend-box.color-scale-2 {
+  background-color: #8FE794;
+}
+
+.legend-box.color-scale-3 {
+  background-color: #4CD964;
+}
+
+.legend-box.color-scale-4 {
+  background-color: #10B981;
+}
+
+@media (max-width: 768px) {
+  .react-calendar-heatmap {
+    font-size: 8px;
+  }
+}
