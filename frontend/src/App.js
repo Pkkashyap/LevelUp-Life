@@ -46,6 +46,7 @@ const Sidebar = () => {
   const navItems = [
     { path: '/', icon: Home, label: 'Dashboard' },
     { path: '/activities', icon: Activity, label: 'Activities' },
+    { path: '/timeline', icon: Clock, label: 'Timeline' },
     { path: '/analytics', icon: BarChart3, label: 'Analytics' },
     { path: '/badges', icon: Award, label: 'Badges' },
     { path: '/settings', icon: SettingsIcon, label: 'Settings' },
