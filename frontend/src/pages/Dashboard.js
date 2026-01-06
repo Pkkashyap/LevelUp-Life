@@ -189,7 +189,7 @@ const Dashboard = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6 }}
+          transition={{ delay: 0.7 }}
           className="lg:col-span-2 bg-white p-6 rounded-xl border-2 border-black shadow-brutal"
           data-testid="weekly-chart"
         >
