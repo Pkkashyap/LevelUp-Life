@@ -107,50 +107,60 @@ const Activities = () => {
   };
 
   const exportToPDF = () => {
-    const doc = new jsPDF();
-    
-    doc.setFontSize(20);
-    doc.text('LevelUp Life - Activity Report', 14, 20);
-    
-    doc.setFontSize(12);
-    doc.text(`Generated: ${new Date().toLocaleDateString()}`, 14, 30);
-    doc.text(`Total Activities: ${filteredActivities.length}`, 14, 37);
-    
-    const tableData = filteredActivities.map(activity => [
-      activity.date,
-      activity.category_name,
-      `${activity.duration} min`,
-      activity.notes || '-'
-    ]);
-    
-    doc.autoTable({
-      startY: 45,
-      head: [['Date', 'Category', 'Duration', 'Notes']],
-      body: tableData,
-      theme: 'grid',
-      styles: { fontSize: 10 },
-      headStyles: { fillColor: [124, 58, 237] }
-    });
-    
-    doc.save('levelup-activities.pdf');
-    toast.success('PDF exported successfully!');
+    try {
+      const doc = new jsPDF();
+      
+      doc.setFontSize(20);
+      doc.text('LevelUp Life - Activity Report', 14, 20);
+      
+      doc.setFontSize(12);
+      doc.text(`Generated: ${new Date().toLocaleDateString()}`, 14, 30);
+      doc.text(`Total Activities: ${filteredActivities.length}`, 14, 37);
+      
+      const tableData = filteredActivities.map(activity => [
+        activity.date,
+        activity.category_name,
+        `${activity.duration} min`,
+        activity.notes || '-'
+      ]);
+      
+      doc.autoTable({
+        startY: 45,
+        head: [['Date', 'Category', 'Duration', 'Notes']],
+        body: tableData,
+        theme: 'grid',
+        styles: { fontSize: 10 },
+        headStyles: { fillColor: [124, 58, 237] }
+      });
+      
+      doc.save('levelup-activities.pdf');
+      toast.success('PDF exported successfully!');
+    } catch (error) {
+      console.error('PDF export error:', error);
+      toast.error('Failed to export PDF');
+    }
   };
 
   const exportToExcel = () => {
-    const excelData = filteredActivities.map(activity => ({
-      Date: activity.date,
-      Category: activity.category_name,
-      'Duration (min)': activity.duration,
-      Notes: activity.notes || '-',
-      'XP Earned': activity.duration * 10
-    }));
-    
-    const worksheet = XLSX.utils.json_to_sheet(excelData);
-    const workbook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(workbook, worksheet, 'Activities');
-    
-    XLSX.writeFile(workbook, 'levelup-activities.xlsx');
-    toast.success('Excel exported successfully!');
+    try {
+      const excelData = filteredActivities.map(activity => ({
+        Date: activity.date,
+        Category: activity.category_name,
+        'Duration (min)': activity.duration,
+        Notes: activity.notes || '-',
+        'XP Earned': activity.duration * 10
+      }));
+      
+      const worksheet = XLSX.utils.json_to_sheet(excelData);
+      const workbook = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(workbook, worksheet, 'Activities');
+      
+      XLSX.writeFile(workbook, 'levelup-activities.xlsx');
+      toast.success('Excel exported successfully!');
+    } catch (error) {
+      console.error('Excel export error:', error);
+      toast.error('Failed to export Excel');
+    }
   };
 
   // Pagination
