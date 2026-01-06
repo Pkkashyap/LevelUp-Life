@@ -8,7 +8,8 @@ import Activities from './pages/Activities';
 import Analytics from './pages/Analytics';
 import Badges from './pages/Badges';
 import Settings from './pages/Settings';
-import { Home, Activity, BarChart3, Award, Settings as SettingsIcon } from 'lucide-react';
+import Timeline from './pages/Timeline';
+import { Home, Activity, BarChart3, Award, Settings as SettingsIcon, Clock } from 'lucide-react';
 import { Toaster } from './components/ui/sonner';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
