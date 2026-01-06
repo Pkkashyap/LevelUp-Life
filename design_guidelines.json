@@ -1,0 +1,169 @@
+{
+  "design_system": {
+    "identity": {
+      "name": "LevelUp Life",
+      "tone": "Playful, Energetic, Gamified, Neo-Brutalist",
+      "archetype": "Electric & Neon (with a Pop twist)",
+      "principles": [
+        "Gamify Everything: Every interaction should feel like a game mechanic.",
+        "Pop & Punch: Use high saturation colors and thick borders.",
+        "Motion is Meaning: Things don't just appear; they bounce, slide, and pop.",
+        "Data is Art: Charts shouldn't be boring; they should look like power levels."
+      ]
+    },
+    "typography": {
+      "primary_font": "Outfit",
+      "secondary_font": "Fredoka",
+      "heading_style": "font-secondary font-bold tracking-tight",
+      "body_style": "font-primary font-medium leading-relaxed",
+      "scale": {
+        "h1": "text-5xl md:text-7xl font-black tracking-tighter",
+        "h2": "text-4xl md:text-5xl font-bold",
+        "h3": "text-2xl md:text-3xl font-bold",
+        "body": "text-base md:text-lg"
+      }
+    },
+    "colors": {
+      "palette": {
+        "primary": {
+          "DEFAULT": "#7C3AED",
+          "foreground": "#FFFFFF",
+          "description": "Electric Violet - Main Brand/Magic Color"
+        },
+        "secondary": {
+          "DEFAULT": "#EC4899",
+          "foreground": "#FFFFFF",
+          "description": "Hot Pink - Health/Energy"
+        },
+        "accent": {
+          "DEFAULT": "#FBBF24",
+          "foreground": "#000000",
+          "description": "Amber Gold - Streaks/Rewards"
+        },
+        "background": "#FEFCE8",
+        "foreground": "#0F172A",
+        "card": "#FFFFFF",
+        "border": "#000000",
+        "input": "#F1F5F9",
+        "ring": "#7C3AED"
+      },
+      "categories": {
+        "study": "#3B82F6",
+        "gaming": "#8B5CF6",
+        "gym": "#EF4444",
+        "sleep": "#6366F1",
+        "custom": "#10B981"
+      }
+    },
+    "visual_enhancers": {
+      "borders": "border-2 border-black",
+      "radius": "rounded-xl md:rounded-2xl",
+      "shadows": {
+        "card": "shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]",
+        "button": "shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px]"
+      },
+      "gradients": "None. Use solid, punchy colors.",
+      "textures": "Subtle noise overlay on background (optional)."
+    },
+    "layout": {
+      "grid_system": "Bento Grid (Mode A for Dashboard)",
+      "spacing": "Generous. Use p-6 or p-8 for cards.",
+      "container": "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
+    },
+    "motion": {
+      "library": "framer-motion",
+      "default_transition": {
+        "type": "spring",
+        "stiffness": 400,
+        "damping": 25
+      },
+      "hover_effects": "Scale up 1.02, Rotate 1deg",
+      "page_transition": "Slide up and fade in"
+    }
+  },
+  "components": {
+    "Button": {
+      "base": "inline-flex items-center justify-center whitespace-nowrap rounded-xl text-sm font-bold ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
+      "variants": {
+        "default": "bg-primary text-primary-foreground border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]",
+        "secondary": "bg-secondary text-secondary-foreground border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]",
+        "outline": "border-2 border-black bg-background hover:bg-accent hover:text-accent-foreground shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]",
+        "ghost": "hover:bg-accent hover:text-accent-foreground border-2 border-transparent hover:border-black"
+      }
+    },
+    "Card": {
+      "base": "rounded-xl border-2 border-black bg-card text-card-foreground shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]"
+    },
+    "Badge": {
+      "base": "inline-flex items-center rounded-full border-2 border-black px-2.5 py-0.5 text-xs font-bold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
+      "variants": {
+        "default": "border-transparent bg-primary text-primary-foreground hover:bg-primary/80",
+        "secondary": "border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80",
+        "outline": "text-foreground"
+      }
+    }
+  },
+  "assets": {
+    "images": {
+      "trophy_abstract": {
+        "url": "https://images.unsplash.com/photo-1730692504752-c411cf0306ac",
+        "alt": "Abstract 3D shapes representing achievement",
+        "category": "achievements"
+      },
+      "controller": {
+        "url": "https://images.unsplash.com/photo-1610561212775-b191f21b6998",
+        "alt": "Purple game controller",
+        "category": "gaming"
+      },
+      "dumbbell": {
+        "url": "https://images.unsplash.com/photo-1641582858581-7eb78baec60d",
+        "alt": "Pink and black dumbbells",
+        "category": "gym"
+      },
+      "books": {
+        "url": "https://images.unsplash.com/photo-1724331341313-ee9d07f2b908",
+        "alt": "Colorful stack of books",
+        "category": "study"
+      },
+      "fire_streak": {
+        "url": "https://images.unsplash.com/photo-1644261766628-3af7203be678",
+        "alt": "Digital fire flame for streaks",
+        "category": "streaks"
+      }
+    },
+    "icons": {
+      "library": "lucide-react",
+      "style": "Bold stroke (stroke-width={2.5} or {3})"
+    }
+  },
+  "instructions_to_main_agent": [
+    "INSTALL FONTS: Add '@fontsource/outfit' and '@fontsource/fredoka' to package.json and import in index.js.",
+    "TAILWIND CONFIG: Update tailwind.config.js to include the new colors and extend the border radius/box shadow theme.",
+    "SHADCN OVERRIDE: You must override the default Shadcn styles. Do not use the subtle gray borders. Use the 'border-2 border-black' and 'shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]' classes defined in visual_enhancers.",
+    "LAYOUT: Use the Bento Grid strategy for the dashboard. Mix large summary cards with smaller stat cards.",
+    "CHARTS: Use Recharts. Style them to match the category colors (e.g., Study chart = Blue, Gym chart = Red).",
+    "GAMIFICATION: Add a 'Level' progress bar at the top of the dashboard. It should be big and chunky.",
+    "TESTING: Add data-testid to all interactive elements (buttons, inputs, cards)."
+  ],
+  "UNIVERSAL_GUIDELINES_FOR_MAIN_AGENT": [
+    "You tend to converge toward generic, 'on distribution' outputs. In frontend design, this creates what users call the 'AI slop' aesthetic. Avoid this: make creative, distinctive frontends that surprise and delight.",
+    "Dark colors look good when used independently without gradients. DO NOT use dark colors as gradients",
+    "Don't make generic centered layouts, simplistic gradients, and uniform styling.",
+    "Create depth through layered design elements with z-index hierarchy",
+    "Use glass-morphism effects with backdrop filters (12-24px blur)",
+    "You MUST NOT apply universal transition. Eg: transition: all. This results in breaking transforms. Always add transitions for specific interactive elements like button, input excluding transforms",
+    "You MUST NOT center align the app container, ie do not add .App { text-align: center; } in the css file. This disrupts the human natural reading flow of text",
+    "Always use modern button styles like pill-shaped, or sharp button with interaction animations & color relevant to the app style",
+    "NEVER: use AI assistant Emoji characters like 🤖🧠💭💡🔮🎯📚🎭🎬🎪🎉🎊🎁🎀🎂🍰🎈🎨🎰💰💵💳🏦💎🪙💸🤑📊📈📉💹🔢🏆🥇 etc for icons.",
+    "Every interaction needs micro-animations - hover states, transitions, parallax effects, and entrance animations. Static = dead.",
+    "Use 2-3x more spacing than feels comfortable. Cramped designs look cheap.",
+    "Subtle grain textures, noise overlays, custom cursors, selection states, and loading animations: separates good from extraordinary.",
+    "Main agent relies on these image URLs. Missing categories (especially sponsor logos) = main agent will use placeholder text which is FORBIDDEN",
+    "Prioritize using pre-existing components from src/components/ui when applicable",
+    "Create new components that match the style and conventions of existing components when needed",
+    "Examine existing components to understand the project's component patterns before creating new ones",
+    "Components MUST use named exports (export const ComponentName = ...)",
+    "Pages MUST use default exports (export default function PageName() {...})",
+    "Use 'sonner' for toasts. Sonner component are located in /app/src/components/ui/sonner.tsx"
+  ]
+}
