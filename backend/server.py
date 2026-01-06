@@ -233,6 +233,30 @@ async def get_badges():
     badges = await db.badges.find({}, {"_id": 0}).to_list(100)
     return badges
 
+class BadgeCreate(BaseModel):
+    name: str
+    description: str
+    icon: str
+    condition_type: str  # streak, activity_count, level, category_specific
+    condition_value: int
+
+@api_router.post("/badges", response_model=Badge)
+async def create_badge(badge: BadgeCreate):
+    import uuid
+    badge_dict = badge.model_dump()
+    badge_dict["id"] = str(uuid.uuid4())
+    badge_dict["is_earned"] = False
+    badge_dict["earned_date"] = None
+    await db.badges.insert_one(badge_dict)
+    return Badge(**badge_dict)
+
+@api_router.delete("/badges/{badge_id}")
+async def delete_badge(badge_id: str):
+    result = await db.badges.delete_one({"id": badge_id})
+    if result.deleted_count == 0:
+        raise HTTPException(status_code=404, detail="Badge not found")
+    return {"message": "Badge deleted"}
+
 # Analytics endpoints
 @api_router.get("/analytics/summary")
 async def get_analytics_summary():
