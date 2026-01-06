@@ -6,6 +6,7 @@ import { Progress } from '../components/ui/progress';
 import { Button } from '../components/ui/button';
 import { useNavigate } from 'react-router-dom';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LineChart, Line } from 'recharts';
+import ActivityHeatmap from '../components/ActivityHeatmap';
 
 const Dashboard = () => {
   const [stats, setStats] = useState(null);
