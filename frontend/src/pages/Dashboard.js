@@ -172,6 +172,17 @@ const Dashboard = () => {
         </motion.div>
       </div>
 
+      {/* GitHub-style Activity Heatmap */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.6 }}
+        className="mb-8 bg-white p-6 rounded-xl border-2 border-black shadow-brutal"
+        data-testid="activity-heatmap"
+      >
+        <ActivityHeatmap activities={allActivities} categories={categories} />
+      </motion.div>
+
       {/* Charts and Recent Activities */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Weekly Chart */}
