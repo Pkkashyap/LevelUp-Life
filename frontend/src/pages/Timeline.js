@@ -45,28 +45,33 @@ const Timeline = () => {
       });
     }
 
-    // Distribute activities across hours (simplified - assumes activities start at hour:00)
+    // Place activities at their actual logged times
     dayActivities.forEach(activity => {
       const category = allCategories.find(c => c.id === activity.category_id);
-      const duration = activity.duration;
-      const startHour = Math.floor(Math.random() * 18) + 6; // Random hour between 6 AM and midnight for demo
       
-      // Add activity to timeline
+      // Parse start time
+      const [startHour, startMinute] = activity.start_time.split(':').map(Number);
+      const duration = activity.duration;
+      
+      // Calculate which hours this activity spans
       let remainingMinutes = duration;
       let currentHour = startHour;
+      let currentMinute = startMinute;
       
       while (remainingMinutes > 0 && currentHour < 24) {
-        const minutesInThisHour = Math.min(remainingMinutes, 60 - timeline[currentHour].totalMinutes);
-        if (minutesInThisHour > 0) {
-          timeline[currentHour].activities.push({
-            ...activity,
-            category,
-            minutesInHour: minutesInThisHour
-          });
-          timeline[currentHour].totalMinutes += minutesInThisHour;
-          remainingMinutes -= minutesInThisHour;
-        }
+        const minutesInThisHour = Math.min(remainingMinutes, 60 - currentMinute);
+        
+        timeline[currentHour].activities.push({
+          ...activity,
+          category,
+          minutesInHour: minutesInThisHour,
+          startMinuteInHour: currentMinute
+        });
+        timeline[currentHour].totalMinutes += minutesInThisHour;
+        
+        remainingMinutes -= minutesInThisHour;
         currentHour++;
+        currentMinute = 0; // After first hour, always start at :00
       }
     });
 
