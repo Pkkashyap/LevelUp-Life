@@ -69,7 +69,7 @@ const Activities = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!formData.category_id || !formData.duration) {
+    if (!formData.category_id || !formData.duration || !formData.start_time) {
       toast.error('Please fill in all required fields');
       return;
     }
@@ -86,13 +86,15 @@ const Activities = () => {
       setFormData({
         category_id: '',
         date: new Date().toISOString().split('T')[0],
+        start_time: new Date().toTimeString().slice(0, 5),
         duration: '',
         notes: '',
       });
       fetchData();
     } catch (error) {
       console.error('Error creating activity:', error);
-      toast.error('Failed to log activity');
+      const errorMsg = error.response?.data?.detail || 'Failed to log activity';
+      toast.error(errorMsg);
     }
   };
 
