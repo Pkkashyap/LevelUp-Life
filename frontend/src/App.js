@@ -29,6 +29,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Dashboard />} />
               <Route path="/activities" element={<Activities />} />
+              <Route path="/timeline" element={<Timeline />} />
               <Route path="/analytics" element={<Analytics />} />
               <Route path="/badges" element={<Badges />} />
               <Route path="/settings" element={<Settings />} />
